@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Notice Board</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Community Notice Board</h1>
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">🌙</button>
+      <button id="login-btn" class="admin-btn">🔐</button>
+
+    </header>
+
+    <nav> 
+      <button onclick="showSection('announcements')">Announcements</button>
+      <button onclick="showSection('events')">Events</button>
+      <button onclick="showSection('marketplace')">Buy/Sell/Rent</button>
+      <button onclick="showSection('contacts')">Contacts</button>
+    </nav>
+
+    <main>
+      <section id="announcements" class="content active">
+        <h2>🔔 Announcements</h2>
+        <ul id="announcements-list"></ul>
+      </section>
+
+      <section id="events" class="content">
+        <h2>🎉 Events</h2>
+        <ul id="events-list"></ul>
+      </section>
+
+      <section id="marketplace" class="content">
+        <h2>🏷️ Buy/Sell/Rent</h2>
+        <ul id="marketplace-list"></ul>
+      </section>
+
+      <section id="contacts" class="content">
+        <h2>📞 Important Contacts</h2>
+        <ul id="contacts-list"></ul>
+      </section>
+
+      <section id="admin-panel" class="admin hidden">
+        <h2>🛠️ Add New Entry</h2>
+
+        <!-- 🔽 Category Selector -->
+        <label
+          >Select Category:<br />
+          <select id="entry-type" onchange="toggleForm()">
+            <option value="announcements">Announcement</option>
+            <option value="events">Event</option>
+            <option value="marketplace">Buy/Sell/Rent</option>
+            <option value="contacts">Contact</option>
+          </select> </label
+        ><br /><br />
+
+        <!-- 📝 Post Form (Dynamic Fields Shown with JS) -->
+        <form id="post-form" >
+          <input type="hidden" id="post-category" value="announcements" />
+
+          <div id="common-post-fields">
+            <label
+              >Message:<br />
+              <input
+                type="text"
+                id="post-message"
+                placeholder="Enter your message"
+                required
+              /> </label
+            ><br /><br />
+          </div>
+
+          <div id="datetime-fields" class="hidden">
+            <label
+              >Date:<br />
+              <input type="date" id="post-date" /> </label
+            ><br /><br />
+
+            <label
+              >Time:<br />
+              <input type="time" id="post-time" /> </label
+            ><br /><br />
+          </div>
+
+          <div id="marketplace-fields" class="hidden">
+            <label
+              >Contact Person:<br />
+              <input type="text" id="market-contact" /> </label
+            ><br /><br />
+
+            <label
+              >Price (₹):<br />
+              <input type="number" id="market-price" /> </label
+            ><br /><br />
+          </div>
+
+          <button type="submit">📌 Post</button>
+        </form>
+
+        <!-- ☎️ Contact Form -->
+        <form id="contact-form" class="hidden" onsubmit="addContact(event)">
+          <label
+            >Contact Name:<br />
+            <input type="text" id="contact-name" required /> </label
+          ><br /><br />
+
+          <label
+            >Phone Number:<br />
+            <input type="text" id="contact-number" required /> </label
+          ><br /><br />
+
+          <button type="submit">📞 Add Contact</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made for the local community • &copy; 2025</p>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+
+    <!-- 🔔 Custom Alert/Prompt Modal -->
+    <div id="custom-modal" class="modal hidden">
+      <div class="modal-content">
+        <p id="modal-message"></p>
+
+        <!-- 🔑 Optional password input -->
+        <input
+          type="password"
+          id="modal-input"
+          class="hidden"
+          placeholder="Enter password"
+        />
+
+        <div class="modal-buttons">
+          <button id="modal-ok">OK</button>
+          <button id="modal-cancel" class="hidden">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
